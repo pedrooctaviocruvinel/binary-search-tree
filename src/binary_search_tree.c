@@ -4,6 +4,16 @@
 #include "binary_search_tree.h"
 #include "tree_node.h"
 
+void bst_init(BinarySearchTree *tree, size_t element_size, CompareFunction compare)
+{
+    if (tree == NULL || compare == NULL)
+        return;
+
+    tree->root = NULL;
+    tree->element_size = element_size;
+    tree->compare = compare;
+}
+
 static TreeNode *create_node(const BinarySearchTree *tree, const void *data)
 {
     TreeNode *node = malloc(sizeof(TreeNode));
@@ -26,18 +36,6 @@ static TreeNode *create_node(const BinarySearchTree *tree, const void *data)
     node->right = NULL;
 
     return node;
-}
-
-void bst_init(BinarySearchTree *tree, size_t element_size, CompareFunction compare)
-{
-    if (tree == NULL)
-    {
-        return;
-    }
-
-    tree->root = NULL;
-    tree->element_size = element_size;
-    tree->compare = compare;
 }
 
 static TreeNode *insert_node(BinarySearchTree *tree, TreeNode *root, const void *data, int *inserted)
